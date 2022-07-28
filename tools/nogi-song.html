@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="../tiny_segmenter.js" charset="UTF-8"></script>
+  <title>t-o-d portfolio</title>
+</head>
+<body>
+  <h1>坂道楽曲ジェネレータ</h1>
+  <button id="createSong">生成</button>
+  <p id="showResult"></p>
+  <a href="./link.html">リンク</a>
+  <a href="../">ホーム</a>
+  <script>
+    const songs = [
+      'ぐるぐるカーテン', 'おいでシャンプー', '走れBicycle', '制服のマネキン', '君の名は希望', 'ガールズルール', 'バレッタ', '気づいたら片想い', '命は美しい', '何度目の青空か','夏のFree&Easy',
+      '左胸の勇気','乃木坂の詩','白い雲にのって','心の薬','偶然を言い訳にして','水玉模様','狼に口笛を','ハウス','せっかちなかたつむり',
+      '音が出ないギター','海流の島よ','指望遠鏡','春のメロディー','渋谷ブルース','シャキイズム','ロマンティックいか焼き','13日の金曜日','サイコキネシスの可能性','世界で一番孤独なLover',
+      '扇風機','コウモリよ','他の星から','人間という楽器','月の大きさ','そんなバカな','初恋の人を今でも','ロマンスのスタート','吐息のメソッド','孤独兄弟',
+      'ダンケシェーン','その先の出口','無口なライオン','ここにいる理由','遠回りの愛情','あの日 僕は咄嗟に嘘をついた','革命の馬','僕がいる場所','傾斜する','自由の彼方'
+    ]
+
+    const btn = document.querySelector('#createSong');
+    const result = document.querySelector("#showResult");
+    btn.addEventListener('click', createSong)
+
+    const segmenter = new TinySegmenter();
+    function createSong(){
+      const kanji = [];
+      const josi = [];
+      const katakana = [];
+      songs.forEach(song => {
+        const segs = segmenter.segment(song)
+        segs.forEach(seg => {
+          if(/^[ァ-ヶー　]*$/.test(seg)){
+            katakana.push(seg)
+          }
+          if(/の|は|が|に/.test(seg)){
+            josi.push(seg)
+          }
+          if(/^[\u4E00-\u9FFF]*$/.test(seg)){
+            kanji.push(seg)
+          }
+        })
+      })
+      const first = kanji[getRandomInt(0,kanji.length)]
+      const middle = josi[getRandomInt(0,josi.length)]
+      const last = katakana[getRandomInt(0,katakana.length)]
+      result.textContent = `${first}${middle}${last}`
+    }
+
+    // min以上max未満の乱数取得
+    function getRandomInt(min,max){
+      min = Math.ceil(min)
+      max = Math.ceil(max)
+      return Math.floor(Math.random() * (max - min) + min)
+    }
+  </script>
+</body>
+</html>
