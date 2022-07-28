@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>t-o-d portfolio</title>
+</head>
+<body>
+    <h1>坂道架空メンバージェネレーター</h1>
+    <div>
+      <button id="createName">生成</button>
+      <p id="showResult"></p>
+    </div>
+    <a href="./link.html">リンク</a>
+    <a href="../">ホーム</a>
+    <script>
+      // メンバー
+      const members = [
+        '白石麻衣', '丹生明里', '賀喜遥香','守屋麗奈','生田絵梨花','西野七瀬', '弓木奈於','小坂菜緒','秋元真夏','桜井玲香',
+        '松村沙友理','与田祐希','高山一実', '久保史緒里','山下美月','齊藤京子','深川麻衣','金村美玖','菅井友香','橋本奈々未',
+        '渡邉美穂','鈴木絢音','河田陽菜','田村真佑','堀未央奈','北野日奈子','大園桃子','伊藤万理華','山崎怜奈',
+        '新内眞衣','松田好花','宮田愛萌','金川紗耶','北川悠理','佐藤璃果','柴田柚菜','生駒里奈','五百城茉央','池田瑛紗','一ノ瀬美空',
+        '井上和','小川彩','菅原咲月','柏幸奈','永島聖羅','中元日芽香','若月佑美','衛藤美彩','小池美波'
+      ]
+
+      const firstNames = members.map(member => member.slice(0, -1)).join('')
+      const lastNames = members.map(member => member.slice(-1)).join('')
+
+      // セレクタ
+      const btn = document.querySelector("#createName")
+      const result = document.querySelector("#showResult")
+      btn.addEventListener("click", createName)
+
+      // 作成処理
+      function createName(){
+        let first = '';
+        for(let i=0;i<3;i++){
+          first += firstNames[getRandomInt(0,firstNames.length)]
+        }
+        const last = lastNames[getRandomInt(0,lastNames.length)]
+        result.textContent = first + last
+      }
+
+      // min以上max未満の乱数取得
+      function getRandomInt(min,max){
+        min = Math.ceil(min)
+        max = Math.ceil(max)
+        return Math.floor(Math.random() * (max - min) + min)
+      }
+    </script>
+</body>
+</html>
