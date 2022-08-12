@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>t-o-d portfolio</title>
+</head>
+<body>
+    <h1>坂道しりとり</h1>
+    <div>
+      <button id="createShiritori">生成</button>
+      <p id="showResult"></p>
+    </div>
+    <a href="./link.html">リンク</a>
+    <a href="../">ホーム</a>
+    <script>
+      let members = [
+        "akimoto manatsu",
+        "saitou asuka",
+        "higuchi hina",
+        "wada maaya",
+        "kitano hinako",
+        "suzuki ayane",
+        "yamazaki rena",
+        "itou riria",
+        "iwamoto renka",
+        "umezawa minami",
+        "kubo shiori",
+        "sakaguchi tamami",
+        "satou kaede",
+        "nakamura reno",
+        "mukai hadzuki",
+        "yamashita midzuki",
+        "yoshida ayanokurisutī",
+        "yoda yuuki",
+        "endou sakura",
+        "kaki haruka",
+        "kakehashi sayaka",
+        "kanagawa saya",
+        "kuromi haruka",
+        "satou rika",
+        "shibata yuna",
+        "seimiya rei",
+        "tamura mayu",
+        "tsutsui ayame",
+        "hayakawa seira",
+        "hayashi runa",
+        "matsuo miyu",
+        "yakubo mio",
+        "yumiki nao",
+        "ioki mao",
+        "ikeda teresa",
+        "ichinose miku",
+        "inoue nagi",
+        "okamoto hina",
+        "ogawa aya",
+        "okuda iroha",
+        "kawasaki sakura",
+        "sugawara satsuki",
+        "tomisato nao",
+        "nakanishi aruno",
+        "yamamoto honoka",
+        "yoshimoto ayaka",
+        "iwase yumiko",
+        "andou mikumo",
+        "kashiwa yukina",
+        "miyazawa seira",
+        "nishikawa nanami",
+        "ichiki rena",
+        "yada risako",
+        "yonetoku kyouka",
+        "itou nene",
+        "yamato rina",
+        "hatanaka seira",
+        "matsui rena",
+        "nagashima seira",
+        "fukagawa mai",
+        "hashimoto nanami",
+        "nakamoto himeka",
+        "itou marika",
+        "kawamura mahiro",
+        "ikoma rina",
+        "saitou chiharu",
+        "sagara iori",
+        "wakatsuki yumi",
+        "noujou ami",
+        "kawago hina",
+        "nishino nanase",
+        "etou misa",
+        "itou karin",
+        "saitou yuuri",
+        "sakurai reika",
+        "sasaki kotoko",
+        "inoue sayuri",
+        "nakada kana",
+        "shiraishi mai",
+        "hori miona",
+        "matsumura sayuri",
+        "itou jun'na",
+        "watanabe miria",
+        "oozono momoko",
+        "takayama kazumi",
+        "terada ranze",
+        "shin'uchi mai",
+        "hoshino minami",
+      ]
+
+      // セレクタ
+      const btn = document.querySelector("#createShiritori")
+      const result = document.querySelector('#showResult')
+      btn.addEventListener("click", outputShiritori)
+
+      // しりとり出力
+      function outputShiritori(){
+        const output = createShiritori()
+        result.innerText = output.join('\n➡︎')
+      }
+
+      // しりとり作成
+      function createShiritori() {
+        const shiritori = []
+        arrayShuffle(members)
+
+        shiritori.push(members[0])
+
+        const next = members.filter(m => !shiritori.includes(m) && members[0].slice(-1) === m[0])
+        if(!next?.length){
+          return shiritori
+        }
+        shiritori.push(next[0])
+
+        const third = members.filter(m => !shiritori.includes(m) && next[0].slice(-1) === m[0])
+        if(!third?.length){
+          return shiritori
+        }
+        shiritori.push(third[0])
+
+        const four = members.filter(m => !shiritori.includes(m) && third[0].slice(-1) === m[0])
+        if(!four?.length){
+          return shiritori
+        }
+        shiritori.push(four[0])
+
+        const five = members.filter(m => !shiritori.includes(m) && four[0].slice(-1) === m[0])
+        if(!five?.length){
+          return shiritori
+        }
+        shiritori.push(five[0])
+
+        return shiritori
+      }
+
+      // 配列のシャッフル
+      function arrayShuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+    </script>
+</body>
+</html>
