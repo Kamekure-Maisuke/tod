@@ -16,5 +16,48 @@
         <li><a href="./diary/link.html">日記</a></li>
         <li><a href="./tools/link.html">ツール集</a></li>
     </ul>
+    <style>
+      .linkSelected {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px dashed #333333;
+      }
+    </style>
+    <script>
+      const links = document.querySelectorAll('li > a')
+      const linkSelectClass = 'linkSelected'
+      let count = 0
+      document.addEventListener('keydown',event => {
+        switch (event.keyCode) {
+          case 74: // j押下時
+            if(count >= 0 && count < links.length){
+              const selected= document.querySelector(`.${linkSelectClass}`)
+              if(selected !== null){
+                selected.classList.remove(linkSelectClass)
+              }
+              count++
+              links[count-1].classList.add(linkSelectClass)
+            }
+            break;
+          case 75: // k押下時
+            if(count > 1 && count <= links.length){
+              const selected= document.querySelector(`.${linkSelectClass}`)
+              if(selected !== null){
+                selected.classList.remove(linkSelectClass)
+              }
+              count -= 1
+              links[count-1].classList.add(linkSelectClass)
+            }
+            break;
+          case 13: // Enter押下時
+            const selectLink = document.querySelector(`.${linkSelectClass}`)
+            if(selectLink !== null){
+              selectLink.click()
+            }
+          default:
+            break;
+        }
+      })
+    </script>
 </body>
 </html>
