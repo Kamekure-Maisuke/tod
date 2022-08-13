@@ -12,6 +12,11 @@
       <button id="seatChange">席替え</button>
       <table border="1" cellspacing="10" cellpadding="30">
         <tr>
+          <td style="border: none;"></td>
+          <td style="border: none;"></td>
+          <td id="teacher" colspan="2" align="center">?</td>
+        </tr>
+        <tr>
           <td class="boys">?</td>
           <td class="girls">?</td>
           <td class="boys">?</td>
@@ -57,10 +62,14 @@
     <a href="../">ホーム</a>
     <script>
       const btn = document.querySelector("#seatChange")
+      const otTeacher = document.querySelector('#teacher')
       const otBoys = document.querySelectorAll('.boys')
       const otGirls = document.querySelectorAll('.girls')
       btn.addEventListener("click", sekigae)
 
+      const teachers = [
+        '設楽統','日村勇紀','澤部佑','土田晃之','若林正恭','春日俊彰','イジリー岡田'
+      ]
       const members = [
         '白石麻衣', '丹生明里', '賀喜遥香','守屋麗奈','生田絵梨花','西野七瀬', '弓木奈於','小坂菜緒','松村沙友理','高山一実',
         '久保史緒里','深川麻衣','橋本奈々未','河田陽菜','北川悠理','佐藤璃果','五百城茉央','一ノ瀬美空','井上和','小川彩','菅原咲月',
@@ -70,10 +79,12 @@
       boys.push('tod')
 
       function sekigae(){
+        arrayShuffle(teachers)
         arrayShuffle(members)
         arrayShuffle(boys)
         const cpBoys = Array.from(boys)
         const cpGirls = Array.from(members.slice(0,16))
+        otTeacher.textContent = teachers[0]
         otBoys.forEach(otBoy => {
           cpBoys.splice(0,1)
           otBoy.textContent = cpBoys[0]
