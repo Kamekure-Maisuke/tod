@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>t-o-d portfolio</title>
+</head>
+<body>
+    <h1>坂道席替え</h1>
+    <div>
+      <button id="seatChange">席替え</button>
+      <table border="1" cellspacing="0" cellpadding="30">
+        <tr>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+        </tr>
+        <tr>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+        </tr>
+        <tr>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+        </tr>
+        <tr>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+        </tr>
+        <tr>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+          <td class="boys">?</td>
+          <td class="girls">?</td>
+        </tr>
+      </table>
+    </div>
+    <a href="./link.html">リンク</a>
+    <a href="../">ホーム</a>
+    <script>
+      const btn = document.querySelector("#seatChange")
+      const otBoys = document.querySelectorAll('.boys')
+      const otGirls = document.querySelectorAll('.girls')
+      btn.addEventListener("click", sekigae)
+
+      const members = [
+        '白石麻衣', '丹生明里', '賀喜遥香','守屋麗奈','生田絵梨花','西野七瀬', '弓木奈於','小坂菜緒','松村沙友理','高山一実',
+        '久保史緒里','深川麻衣','橋本奈々未','河田陽菜','北川悠理','佐藤璃果','五百城茉央','一ノ瀬美空','井上和','小川彩','菅原咲月',
+        '中元日芽香','小池美波'
+      ]
+      const boys = Array.from({length: 15},() => '男')
+      boys.push('tod')
+
+      function sekigae(){
+        arrayShuffle(members)
+        arrayShuffle(boys)
+        const cpBoys = Array.from(boys)
+        const cpGirls = Array.from(members.slice(0,16))
+        otBoys.forEach(otBoy => {
+          cpBoys.splice(0,1)
+          otBoy.textContent = cpBoys[0]
+        })
+        otGirls.forEach(otGirl => {
+          cpGirls.splice(0,1)
+          otGirl.textContent = cpGirls[0]
+        })
+      }
+
+      // 配列のシャッフル
+      function arrayShuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+    </script>
+</body>
+</html>
