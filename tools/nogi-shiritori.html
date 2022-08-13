@@ -9,6 +9,13 @@
 <body>
     <h1>坂道しりとり</h1>
     <div>
+      <select name="size" id="size">
+        <option value="default">サイズを指定してください</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
       <button id="createShiritori">生成</button>
       <p id="showResult"></p>
     </div>
@@ -107,45 +114,48 @@
       ]
 
       // セレクタ
+      const input = document.querySelector('#size')
       const btn = document.querySelector("#createShiritori")
       const result = document.querySelector('#showResult')
       btn.addEventListener("click", outputShiritori)
 
       // しりとり出力
       function outputShiritori(){
-        const output = createShiritori()
+        const size = input.value
+        if(size === 'default'){
+          result.textContent = 'サイズを指定してください。'
+          return;
+        }
+        const output = createShiritori(size)
         result.innerText = output.join('\n➡︎')
       }
 
       // しりとり作成
-      function createShiritori() {
+      function createShiritori(size) {
         const shiritori = []
         arrayShuffle(members)
-
         shiritori.push(members[0])
 
-        const next = members.filter(m => !shiritori.includes(m) && members[0].slice(-1) === m[0])
-        if(!next?.length){
-          return shiritori
-        }
-        shiritori.push(next[0])
+        const second = members.filter(m => !shiritori.includes(m) && members[0].slice(-1) === m[0])
+        if(!second?.length) return shiritori
+        shiritori.push(second[0])
+        if(size === '2') return shiritori
 
-        const third = members.filter(m => !shiritori.includes(m) && next[0].slice(-1) === m[0])
+        const third = members.filter(m => !shiritori.includes(m) && second[0].slice(-1) === m[0])
         if(!third?.length){
           return shiritori
         }
+        if(!third?.length) return shiritori
         shiritori.push(third[0])
+        if(size === '3') return shiritori
 
         const four = members.filter(m => !shiritori.includes(m) && third[0].slice(-1) === m[0])
-        if(!four?.length){
-          return shiritori
-        }
+        if(!four?.length) return shiritori
         shiritori.push(four[0])
+        if(size === '4') return shiritori
 
         const five = members.filter(m => !shiritori.includes(m) && four[0].slice(-1) === m[0])
-        if(!five?.length){
-          return shiritori
-        }
+        if(!five?.length) return shiritori
         shiritori.push(five[0])
 
         return shiritori
