@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>t-o-d portfolio</title>
+</head>
+<body>
+  <h1>タイムスタンプ変換</h1>
+  <input type="text" id="timestamp">
+  <button id="convertTs">変換</button>
+  <div id="balloon5">
+    <div class="faceicon">
+      <img src="../penguin.webp" alt="t_o_dのアイコン画像です。" loading="lazy">
+    </div>
+    <div class="chatting">
+      <div class="says" id="result">
+        <p>タイムスタンプ入力</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <a href="./link.html">リンク</a>
+    <a href="../">ホーム</a>
+  </div>
+  <style>
+    #balloon5 {
+      width: 100%;
+      margin: 1.5em 0;
+      overflow: hidden;
+      display: none;
+    }
+
+    #balloon5 .faceicon {
+      float: left;
+      margin-right: -90px;
+      width: 80px;
+    }
+
+    #balloon5 .faceicon img{
+      width: 100%;
+      height: auto;
+      border: solid 3px #d7ebfe;
+      border-radius: 50%;
+    }
+
+    #balloon5 .chatting {
+      width: 100%;
+    }
+
+    .says {
+      display: inline-block;
+      position: relative; 
+      margin: 5px 0 0 105px;
+      padding: 17px 13px;
+      border-radius: 12px;
+      background: #d7ebfe;
+    }
+
+    .says:after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 18px; 
+      left: -24px;
+      border: 12px solid transparent;
+      border-right: 12px solid #d7ebfe;
+    }
+
+    .says p {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script defer>
+    const input = document.getElementById('timestamp')
+    const btn = document.getElementById('convertTs')
+    const chat = document.getElementById('balloon5')
+    const result = document.getElementById('result')
+    btn.addEventListener("click", outputTs)
+
+    // タイムスタンプ変換値出力
+    function outputTs(){
+      chat.style.display = 'block'
+      result.textContent = ''
+      const ts =input.value
+      if(ts.trim() === ''){
+        result.textContent = 'タイムスタンプを入力してください。';
+        return;
+      }
+      const date = formatTimestamp(ts)
+      if(date === 'Invalid Date'){
+        result.textContent = '正常なタイムスタンプを入力してください。'
+        return;
+      }
+      result.textContent = date
+    }
+
+    // タイムスタンプから日時変換
+    function formatTimestamp(ts){
+      return (new Date(Number(ts) * 1000)).toLocaleString('ja-JP', {
+          timeZone: 'Asia/Tokyo',
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', second: '2-digit',
+      });
+    };
+  </script>
+</body>
+</html>
