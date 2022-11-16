@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>t-o-d portfolio</title>
+</head>
+<body>
+  <h1>坂道神経衰弱</h1>
+  <script defer>
+    // メンバー一覧
+    const members = [
+      '白石麻衣', '丹生明里', '賀喜遥香','守屋麗奈','生田絵梨花','西野七瀬', '弓木奈於','小坂菜緒','秋元真夏','桜井玲香',
+      '松村沙友理','与田祐希','高山一実', '久保史緒里','山下美月','齊藤京子','深川麻衣','金村美玖','菅井友香','橋本奈々未',
+      '渡邉美穂','鈴木絢音','河田陽菜','田村真佑','堀未央奈','北野日奈子','大園桃子','伊藤万理華','山崎怜奈',
+      '新内眞衣','松田好花','宮田愛萌','金川紗耶','北川悠理','佐藤璃果','柴田柚菜','生駒里奈','五百城茉央','池田瑛紗','一ノ瀬美空',
+      '井上和','小川彩','菅原咲月','柏幸奈','永島聖羅','中元日芽香','若月佑美','衛藤美彩','小池美波'
+    ]
+
+    // 候補メンバーを毎回シャッフル
+    arrayShuffle(members)
+
+    // 対象メンバーの作成
+    const suijakuMembers = [];
+    members.slice(0, 8).forEach(member => {
+      suijakuMembers.push(member)
+      suijakuMembers.push(member)
+    })
+    arrayShuffle(suijakuMembers)
+
+    // container_UI作成
+    const size = 100
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    container.style.position = 'relative';
+    container.style.width = `${size * 9}px`;
+    container.style.height = `${size * 9}px`;
+
+    // 表作成・クリックイベント
+    let text = null; // クリック時のメンバー情報格納
+    let first = null; // クリック時の要素格納
+    let timer = NaN; // setTimeOut用
+    suijakuMembers.forEach((sm, i) => {
+      const div = document.createElement('div');
+      const x = Math.floor(i/4)
+      const y = i < 4 ? i : i - Math.floor(i/4)*4;
+      container.appendChild(div);
+      Object.assign(div.style, {
+        position: 'absolute',
+        width: `${size}px`,
+        height: `${size}px`,
+        left: `${size * y}px`,
+        top: `${size * x}px`,
+        border: '1px solid #000',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      })
+      div.classList.add('reject')
+
+      div.onclick = (e) => {
+        e.preventDefault();
+        let current = e.target;
+
+        if(!current.classList.contains('reject') || timer){
+          return;
+        }
+
+        current.classList.remove("reject");
+
+        if(first === null){
+          first = current
+          text = sm
+          current.textContent = sm
+        }else {
+          if(text === sm){
+            first = null
+            current.textContent = sm
+          }else {
+            current.textContent = sm
+            timer = setTimeout(() => {
+              first.classList.add("reject");
+              current.classList.add("reject");
+              first.textContent = ''
+              current.textContent = ''
+              first = null
+              timer = NaN
+            }, 500)
+          }
+        }
+      }
+    })
+
+    // 配列のシャッフル
+    function arrayShuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+  </script>
+</body>
+</html>
