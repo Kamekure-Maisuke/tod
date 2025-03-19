@@ -1,64 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>t-o-d portfolio</title>
-</head>
-<body>
-    <h1>t-o-dのホームページ</h1>
-    <img src="./penguin.webp" alt="t-o-dのアイコン画像です。" loading="lazy" width="100px" height="100px">
-    <ul>
-        <li><a href="https://github.com/Kamekure-Maisuke" target="_blank" rel="noopener noreferrer">Github</a></li>
-        <li><a href="https://qiita.com/t_o_d" target="_blank" rel="noopener noreferrer">Qiita</a></li>
-        <li><a href="https://zenn.dev/t_o_d" target="_blank" rel="noopener noreferrer">Zenn</a></li>
-        <li><a href="./diary/link.html">日記</a></li>
-        <li><a href="./tools/link.html">ツール集</a></li>
-        <li><a href="./tw/index.html">推しTwitter</a></li>
-    </ul>
-    <style>
-      .linkSelected {
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px dashed #333333;
-      }
-    </style>
-    <script>
-      const links = document.querySelectorAll('li > a')
-      const linkSelectClass = 'linkSelected'
-      let count = 0
-      document.addEventListener('keydown',event => {
-        switch (event.keyCode) {
-          case 74: // j押下時
-            if(count >= 0 && count < links.length){
-              const selected= document.querySelector(`.${linkSelectClass}`)
-              if(selected !== null){
-                selected.classList.remove(linkSelectClass)
-              }
-              count++
-              links[count-1].classList.add(linkSelectClass)
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>t-o-d portfolio</title>
+    </head>
+    <body>
+        <h1>t-o-dのホームページ</h1>
+        <img
+            src="./penguin.webp"
+            alt="t-o-dのアイコン画像です。"
+            loading="lazy"
+            width="100px"
+            height="100px"
+        />
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/Kamekure-Maisuke"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Github</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://qiita.com/t_o_d"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Qiita</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://zenn.dev/t_o_d"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Zenn</a
+                >
+            </li>
+            <li><a href="./diary/link.html">日記</a></li>
+            <li><a href="./tools/link.html">ツール集</a></li>
+        </ul>
+        <style>
+            .linkSelected {
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px dashed #333333;
             }
-            break;
-          case 75: // k押下時
-            if(count > 1 && count <= links.length){
-              const selected= document.querySelector(`.${linkSelectClass}`)
-              if(selected !== null){
-                selected.classList.remove(linkSelectClass)
-              }
-              count -= 1
-              links[count-1].classList.add(linkSelectClass)
-            }
-            break;
-          case 13: // Enter押下時
-            const selectLink = document.querySelector(`.${linkSelectClass}`)
-            if(selectLink !== null){
-              selectLink.click()
-            }
-          default:
-            break;
-        }
-      })
-    </script>
-</body>
+        </style>
+        <script>
+            const links = document.querySelectorAll("li > a");
+            const linkSelectClass = "linkSelected";
+            let count = 0;
+            document.addEventListener("keydown", (event) => {
+                switch (event.keyCode) {
+                    case 74: // j押下時
+                        if (count >= 0 && count < links.length) {
+                            const selected = document.querySelector(
+                                `.${linkSelectClass}`,
+                            );
+                            if (selected !== null) {
+                                selected.classList.remove(linkSelectClass);
+                            }
+                            count++;
+                            links[count - 1].classList.add(linkSelectClass);
+                        }
+                        break;
+                    case 75: // k押下時
+                        if (count > 1 && count <= links.length) {
+                            const selected = document.querySelector(
+                                `.${linkSelectClass}`,
+                            );
+                            if (selected !== null) {
+                                selected.classList.remove(linkSelectClass);
+                            }
+                            count -= 1;
+                            links[count - 1].classList.add(linkSelectClass);
+                        }
+                        break;
+                    case 13: // Enter押下時
+                        const selectLink = document.querySelector(
+                            `.${linkSelectClass}`,
+                        );
+                        if (selectLink !== null) {
+                            selectLink.click();
+                        }
+                    default:
+                        break;
+                }
+            });
+        </script>
+    </body>
 </html>
